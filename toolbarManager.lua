@@ -7,9 +7,18 @@ function toolbarManager.destroyOldToolbars(parent, names)
 	end
 end
 
+local function findFirstChildWithClass(object, name, class)
+	for _, obj in pairs(object:GetChildren()) do
+		if obj:IsA(class) and obj.Name == name then
+			return obj
+		end
+	end
+	return nil
+end
+
 function toolbarManager.getToolbar(plugin, parent, toolbarName)
-	local toolbar = parent:FindFirstChild(toolbarName)
-	
+	local toolbar = findFirstChildWithClass(parent, toolbarName, "PluginToolbar")
+
 	if not toolbar then
 		toolbar = plugin:CreateToolbar(toolbarName)
 		toolbar.Name = toolbarName;
