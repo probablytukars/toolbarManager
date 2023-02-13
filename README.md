@@ -1,1 +1,3 @@
-# toolbarManager
+# Toolbar Manager
+
+#### NOTICE: THIS PROJECT IS CURRENTLY IN THE PROCESS OF BEING DOCUMENTED
