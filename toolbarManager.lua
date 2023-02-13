@@ -1,12 +1,5 @@
 local toolbarManager = {}
 
-function toolbarManager.destroyOldToolbars(parent, names)
-	for _, name in pairs(names) do
-		local oldToolbar = parent:FindFirstChild(name)
-		if oldToolbar then oldToolbar:Destroy() end
-	end
-end
-
 local function findFirstChildWithClass(object, name, class)
 	for _, obj in pairs(object:GetChildren()) do
 		if obj:IsA(class) and obj.Name == name then
@@ -14,6 +7,13 @@ local function findFirstChildWithClass(object, name, class)
 		end
 	end
 	return nil
+end
+
+function toolbarManager.destroyOldToolbars(parent, names)
+	for _, name in pairs(names) do
+		local oldToolbar = parent:FindFirstChild(name)
+		if oldToolbar then oldToolbar:Destroy() end
+	end
 end
 
 function toolbarManager.getToolbar(plugin, parent, toolbarName)
