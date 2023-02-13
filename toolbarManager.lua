@@ -9,13 +9,6 @@ local function findFirstChildWithClass(object, name, class)
 	return nil
 end
 
-function toolbarManager.destroyOldToolbars(parent, names)
-	for _, name in pairs(names) do
-		local oldToolbar = parent:FindFirstChild(name)
-		if oldToolbar then oldToolbar:Destroy() end
-	end
-end
-
 function toolbarManager.getToolbar(plugin, parent, toolbarName)
 	local toolbar = findFirstChildWithClass(parent, toolbarName, "PluginToolbar")
 
@@ -24,20 +17,21 @@ function toolbarManager.getToolbar(plugin, parent, toolbarName)
 		toolbar.Name = toolbarName;
 		toolbar.Parent = parent;
 	end
-	
+
 	return toolbar
 end
 
 function toolbarManager.addButton(toolbar, buttonName, description, imageID)
 	local existingButton = toolbar:FindFirstChild(buttonName)
-	
-	if existingButton then existingButton:Destroy() end
-	
+
+	if existingButton then return existingButton end
+
 	local newButton = toolbar:CreateButton(buttonName, description, imageID)
 	newButton.Name = buttonName
 	newButton.Parent = toolbar
-	
+
 	return newButton	
 end
 
 return toolbarManager
+
