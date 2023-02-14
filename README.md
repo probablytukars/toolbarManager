@@ -12,13 +12,15 @@ local toolbarManager = require(path.to.module)
 local function buildButton(toolbar)
 	local button = toolbarManager.addButton(
 		toolbar,
-		"Part Face Selector", 
-		"Shows selected face of models and baseparts. Can also display directional vectors.", 
-		"rbxassetid://..."
+		"Create Motor6D", 
+		"Create Motor6Ds for parts", 
+		"rbxassetid://9467278136"
 	)
-
+	
+	button:SetActive(WIDGET.Enabled)
 	button.Click:connect(function()
 		WIDGET.Enabled = not WIDGET.Enabled
+		button:SetActive(WIDGET.Enabled)
 	end)
 end
 
