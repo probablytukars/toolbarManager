@@ -12,9 +12,7 @@ function toolbarManager.getToolbar(plugin, parent, toolbarName, ancestryChanged)
 	toolbar.AncestryChanged:Connect(function()
 		local newToolbar = parent:WaitForChild(toolbarName, 5)
 		if newToolbar and newToolbar.Parent then
-			if ancestryChanged then
-				ancestryChanged(newToolbar)
-			end
+			ancestryChanged(newToolbar)
 		end
 	end)
 	
