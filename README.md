@@ -1,4 +1,4 @@
-# Toolbar Manager
+# Roblox Shared Toolbar Manager
 
 This is very simple library implementing two functions: `getToolbar`, and `addButton`. The purpose of this library is to make it easy to combine multiple plugin buttons under one toolbar, without running into errors.
 
