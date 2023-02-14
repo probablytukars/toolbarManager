@@ -1,16 +1,7 @@
 local toolbarManager = {}
 
-local function findFirstChildWithClass(object, name, class)
-	for _, obj in pairs(object:GetChildren()) do
-		if obj:IsA(class) and obj.Name == name then
-			return obj
-		end
-	end
-	return nil
-end
-
-function toolbarManager.getToolbar(plugin, parent, toolbarName)
-	local toolbar = findFirstChildWithClass(parent, toolbarName, "PluginToolbar")
+function toolbarManager.getToolbar(plugin, parent, toolbarName, ancestryChanged)
+	local toolbar = parent:FindFirstChild(toolbarName)
 
 	if not toolbar then
 		toolbar = plugin:CreateToolbar(toolbarName)
@@ -18,7 +9,16 @@ function toolbarManager.getToolbar(plugin, parent, toolbarName)
 		toolbar.Parent = parent;
 	end
 
-	return toolbar
+	toolbar.AncestryChanged:Connect(function()
+		local newToolbar = parent:WaitForChild(toolbarName, 5)
+		if newToolbar and newToolbar.Parent then
+			if ancestryChanged then
+				ancestryChanged(newToolbar)
+			end
+		end
+	end)
+	
+	ancestryChanged(toolbar)
 end
 
 function toolbarManager.addButton(toolbar, buttonName, description, imageID)
@@ -34,4 +34,3 @@ function toolbarManager.addButton(toolbar, buttonName, description, imageID)
 end
 
 return toolbarManager
-
