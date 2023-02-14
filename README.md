@@ -9,8 +9,6 @@ local toolbarManager = require(path.to.module)
 
 --your code here.
 
-local widgetState = false
-
 local function buildButton(toolbar)
 	local button = toolbarManager.addButton(
 		toolbar,
@@ -20,8 +18,7 @@ local function buildButton(toolbar)
 	)
 
 	button.Click:connect(function()
-		widgetState = not widgetState
-		WIDGET.Enabled = widgetState
+		WIDGET.Enabled = not WIDGET.Enabled
 	end)
 end
 
