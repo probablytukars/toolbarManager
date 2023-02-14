@@ -16,7 +16,7 @@ local function buildButton(toolbar)
 		toolbar,
 		"Part Face Selector", 
 		"Shows selected face of models and baseparts. Can also display directional vectors.", 
-		"rbxassetid://5602410390"
+		"rbxassetid://..."
 	)
 
 	button.Click:connect(function()
