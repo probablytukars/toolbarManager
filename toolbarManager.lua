@@ -1,16 +1,32 @@
 local toolbarManager = {}
 
-function toolbarManager.getToolbar(plugin, parent, toolbarName, ancestryChanged)
-	local toolbar = parent:FindFirstChild(toolbarName)
+local function getToolbarFolder()
+	local coreGui = game:GetService("CoreGui")
+	local folderName = "PluginToolbars"
+	
+	local toolbarFolder = coreGui:FindFirstChild(folderName)
+	
+	if not toolbarFolder then
+		toolbarFolder = Instance.new("Folder")
+		toolbarFolder.Name = folderName
+		toolbarFolder.Parent = coreGui
+	end
+	
+	return toolbarFolder
+end
+
+function toolbarManager.getToolbar(plugin, toolbarName, ancestryChanged)
+	local toolbarFolder = getToolbarFolder()
+	local toolbar = toolbarFolder:FindFirstChild(toolbarName)
 
 	if not toolbar then
 		toolbar = plugin:CreateToolbar(toolbarName)
 		toolbar.Name = toolbarName;
-		toolbar.Parent = parent;
+		toolbar.Parent = toolbarFolder;
 	end
 
 	toolbar.AncestryChanged:Connect(function()
-		local newToolbar = parent:WaitForChild(toolbarName, 5)
+		local newToolbar = toolbarFolder:WaitForChild(toolbarName, 5)
 		if newToolbar and newToolbar.Parent then
 			ancestryChanged(newToolbar)
 		end
